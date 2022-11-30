@@ -1,4 +1,5 @@
 // VOORRAAD ARRAY MET TV'S
+console.log("hello!")
 const inventory = [
   {
     type: '43PUS6504/12',
@@ -161,3 +162,78 @@ const inventory = [
     sold: 8,
   },
 ];
+
+const tvTypes = inventory.map((tvType) => {
+  return tvType.type;
+});
+console.log(tvTypes);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const soldOutTVs = inventory.filter((soldOutTV) => {
+  if((soldOutTV.originalStock - soldOutTV.sold) === 0){
+    return soldOutTV;
+  }
+});
+console.log(soldOutTVs)
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const ambiTvs = inventory.filter((ambiTv) => {
+  if (ambiTv.options.ambiLight){
+    return ambiTv;
+  }
+});
+console.log(ambiTvs)
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const cheapestTvs = inventory.sort((a, b) => {
+  return a.price - b.price
+});
+console.log(cheapestTvs)
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+const soldTvs = inventory.map((soldTv) => {
+  return soldTv.sold
+  });
+let sumSold =null;
+for (let i = 0; i < soldTvs.length; i++) {
+  sumSold += soldTvs[i]
+}
+console.log(sumSold)
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const sold = document.getElementById("sold");
+sold.textContent = `Er zijn  ${sumSold}  tv's verkocht`
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const boughTvs = inventory.map((boughtTv) => {
+  return boughtTv.originalStock
+});
+let sumBought =null;
+for (let i = 0; i < boughTvs.length; i++) {
+  sumBought += boughTvs[i]
+}
+console.log(sumBought)
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const bought = document.getElementById("bought");
+bought.textContent = `Er zijn  ${sumBought}  tv's verkocht`
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const totalToSell = sumBought - sumSold;
+const tosell = document.getElementById("tosell");
+tosell.textContent = `Er zijn nog  ${totalToSell}  tv's over`;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const listTvtypes = tvTypes
+const list = document.getElementById("list");
+list.textContent = listTvtypes
