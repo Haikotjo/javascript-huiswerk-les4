@@ -1,5 +1,4 @@
 // VOORRAAD ARRAY MET TV'S
-console.log("hello!")
 const inventory = [
   {
     type: '43PUS6504/12',
@@ -234,6 +233,78 @@ tosell.textContent = `Er zijn nog  ${totalToSell}  tv's over`;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const listTvtypes = tvTypes
-const list = document.getElementById("list");
-list.textContent = listTvtypes
+// const listTvtypes = tvTypes
+// const list = document.getElementById("list");
+// list.textContent = listTvtypes
+// console.log(tvTypes)
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// function makeList() {
+//
+//   const tvTypes = inventory.map((tvType) => {
+//     return tvType.type;
+//   });
+//   console.log(tvTypes);
+//
+// }
+// console.log(makeList())
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function makeListTohtml() {
+  const tablefield = document.getElementById("table-field");
+  inventory.map((tv) =>{
+    return tablefield.innerHTML += `
+  <tr>
+        <td  id="list"> ${ tv.type} </td>
+    </tr>
+  `
+  } );
+};
+makeListTohtml()
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+function tvString(tv) {
+  return inventory[tv].name + ' ' + inventory[tv].brand + ' ' + inventory[tv].type;
+}
+console.log(tvString(3));
+
+function priceToEuro(price) {
+  return inventory[price].price + " €";
+}
+console.log(priceToEuro(1));
+
+function screenSize(size) {
+  let sizes = inventory[size].availableSizes
+  let cm = []
+  for (let i = 0; i < sizes.length; i++) {
+    cm += sizes[i] + " inch " + "(" + Math.round(sizes[i] * 2.54) + " cm) "
+  }
+  return cm;
+}
+console.log(screenSize(0));
+
+function makeTv(number) {
+  const aTvs = document.getElementById("aTvs");
+  aTvs.innerText = `${tvString(number)}`
+  const aTvp = document.getElementById("aTvp");
+  aTvp.innerText = `${priceToEuro(number)}`
+  const aTvz = document.getElementById("aTvz");
+  aTvz.innerText = `${screenSize(number)}`
+}
+
+console.log("hello")
+makeTv(4)
+
+// const completeTv = {
+//   tvName : tvString(0),
+//   price : priceToEuro(0),
+//   size: screenSize(0)
+// }
+// console.log(completeTv)
+
+
